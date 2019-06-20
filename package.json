@@ -2,10 +2,38 @@
   "name": "soundboard",
   "version": "1.0.0",
   "main": "src/electron.js",
+  "private": true,
+  "author": {
+    "name": "Luis Carlin",
+    "email": "luiscarlin@gmail.com",
+    "url": "https://github.com/LuisCarlin"
+  },
   "dependencies": {
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "com.boskysoft",
+    "files": [
+      "src/electron.js",
+      "src/assets/*",
+      "build/**/*"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "src/assets/logo.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/logo.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "src/assets/logo.png",
+      "category": "Development"
+    }
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -20,7 +48,10 @@
   },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
-    "react-start": "parcel -p 3000 index.html",
-    "react-build": "parcel build index.html"
+    "react-start": "parcel -p 3000 index.html --out-dir build",
+    "build": "yarn clean-build && yarn react-build && yarn electron-build",
+    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "electron-build": "electron-builder -mwl",
+    "clean-build": "rm -rf build/ .cache dist/"
   }
 }
