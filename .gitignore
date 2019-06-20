@@ -4,3 +4,6 @@
 /.cache
 /dist
 /build
+
+# misc
+.DS_Store
