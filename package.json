@@ -11,7 +11,8 @@
   "dependencies": {
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3"
   },
   "homepage": "./",
   "build": {
@@ -52,6 +53,6 @@
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "react-build": "parcel build index.html --out-dir build --public-url ./",
     "electron-build": "electron-builder -mwl",
-    "clean-build": "rm -rf build/ .cache dist/"
+    "clean-build": "rimraf build/ .cache dist/"
   }
 }
